@@ -139,8 +139,10 @@
 #define HEATER_1_PIN                        PB0   // HEATER2
 #define HEATER_BED_PIN                      PA0   // HOT BED
 
-#define FAN1_PIN                             PC14  // FAN1
-#define FAN2_PIN                            PB1   // FAN2
+//#define FAN_PIN                            PC14  // FAN1
+//#define FAN1_PIN                            PB1   // FAN2
+#define FAN_PIN PB1
+#define FAN1_PIN  PC14
 
 //
 // Thermocouples
