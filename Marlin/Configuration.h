@@ -192,13 +192,13 @@
 
 // This defines the number of extruders
 // :[0, 1, 2, 3, 4, 5, 6, 7, 8]
-#define EXTRUDERS 2
+#define EXTRUDERS 1
 
 // Generally expected filament diameter (1.75, 2.85, 3.0, ...). Used for Volumetric, Filament Width Sensor, etc.
 #define DEFAULT_NOMINAL_FILAMENT_DIA 1.75
 
 // For Cyclops or any "multi-extruder" that shares a single nozzle.
-#define SINGLENOZZLE
+// #define SINGLENOZZLE
 
 // Save and restore temperature and fan speed on tool-change.
 // Set standby for the unselected tool with M104/106/109 T...
@@ -602,7 +602,7 @@
 
 // Comment the following line to disable PID and enable bang-bang.
 #define PIDTEMP
-#define BANG_MAX 255     // Limits current to nozzle while in bang-bang mode; 255=full current
+#define BANG_MAX 200     // Limits current to nozzle while in bang-bang mode; 255=full current
 #define PID_MAX BANG_MAX // Limits current to nozzle while PID is active (see PID_FUNCTIONAL_RANGE below); 255=full current
 #define PID_K1 0.95      // Smoothing factor within any PID loop
 
@@ -703,7 +703,7 @@
  * When set to any value below 255, enables a form of PWM to the chamber heater that acts like a divider
  * so don't use it unless you are OK with PWM on your heater. (See the comment on enabling PIDTEMPCHAMBER)
  */
-#define MAX_CHAMBER_POWER 255 // limits duty cycle to chamber heater; 255=full current
+#define MAX_CHAMBER_POWER 200 // limits duty cycle to chamber heater; 255=full current
 
 #if ENABLED(PIDTEMPCHAMBER)
 #define MIN_CHAMBER_POWER 0
@@ -805,13 +805,13 @@
 // Almost all printers will be using one per axis. Probes will use one or more of the
 // extra connectors. Leave undefined any used for non-endstop and non-probe purposes.
 #define USE_XMIN_PLUG
-// #define USE_YMIN_PLUG
+#define USE_YMIN_PLUG
 #define USE_ZMIN_PLUG
 // #define USE_IMIN_PLUG
 // #define USE_JMIN_PLUG
 // #define USE_KMIN_PLUG
 // #define USE_XMAX_PLUG
-#define USE_YMAX_PLUG
+// #define USE_YMAX_PLUG
 // #define USE_ZMAX_PLUG
 // #define USE_IMAX_PLUG
 // #define USE_JMAX_PLUG
@@ -856,9 +856,9 @@
 #endif
 
 // Mechanical endstop with COM to ground and NC to Signal uses "false" here (most common setup).
-#define X_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define Y_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
-#define Z_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
+#define X_MIN_ENDSTOP_INVERTING true        // Set to true to invert the logic of the endstop.
+#define Y_MIN_ENDSTOP_INVERTING true        // Set to true to invert the logic of the endstop.
+#define Z_MIN_ENDSTOP_INVERTING true        // Set to true to invert the logic of the endstop.
 #define I_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define J_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
 #define K_MIN_ENDSTOP_INVERTING false       // Set to true to invert the logic of the endstop.
@@ -888,19 +888,19 @@
  *          TMC5130, TMC5130_STANDALONE, TMC5160, TMC5160_STANDALONE
  * :['A4988', 'A5984', 'DRV8825', 'LV8729', 'L6470', 'L6474', 'POWERSTEP01', 'TB6560', 'TB6600', 'TMC2100', 'TMC2130', 'TMC2130_STANDALONE', 'TMC2160', 'TMC2160_STANDALONE', 'TMC2208', 'TMC2208_STANDALONE', 'TMC2209', 'TMC2209_STANDALONE', 'TMC26X', 'TMC26X_STANDALONE', 'TMC2660', 'TMC2660_STANDALONE', 'TMC5130', 'TMC5130_STANDALONE', 'TMC5160', 'TMC5160_STANDALONE']
  */
-#define X_DRIVER_TYPE TMC2209
-#define Y_DRIVER_TYPE TMC2209
-#define Z_DRIVER_TYPE TMC2209
+#define X_DRIVER_TYPE A4988
+#define Y_DRIVER_TYPE A4988
+#define Z_DRIVER_TYPE A4988
 // #define X2_DRIVER_TYPE A4988
 // #define Y2_DRIVER_TYPE A4988
-// #define Z2_DRIVER_TYPE A4988
+#define Z2_DRIVER_TYPE A4988
 // #define Z3_DRIVER_TYPE A4988
 // #define Z4_DRIVER_TYPE A4988
 // #define I_DRIVER_TYPE  A4988
 // #define J_DRIVER_TYPE  A4988
 // #define K_DRIVER_TYPE  A4988
-#define E0_DRIVER_TYPE TMC2209
-#define E1_DRIVER_TYPE TMC2209
+#define E0_DRIVER_TYPE A4988
+// #define E1_DRIVER_TYPE A4988
 // #define E2_DRIVER_TYPE A4988
 // #define E3_DRIVER_TYPE A4988
 // #define E4_DRIVER_TYPE A4988
@@ -956,7 +956,7 @@
  */
 #define DEFAULT_AXIS_STEPS_PER_UNIT \
   {                                 \
-    80, 80, 400, 93                 \
+    80, 80, 400, 90                 \
   }
 
 /**
@@ -1075,7 +1075,6 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN
 
 // Force the use of the probe for Z-axis homing
 // #define USE_PROBE_FOR_Z_HOMING
@@ -1132,7 +1131,7 @@
 /**
  * The BLTouch probe uses a Hall effect sensor and emulates a servo.
  */
-#define BLTOUCH
+// #define BLTOUCH
 
 /**
  * Touch-MI Probe by hotends.fr
@@ -1369,9 +1368,9 @@
 // @section machine
 
 // Invert the stepper direction. Change (or reverse the motor connector) if an axis goes the wrong way.
-#define INVERT_X_DIR false
-#define INVERT_Y_DIR false
-#define INVERT_Z_DIR false
+#define INVERT_X_DIR true
+#define INVERT_Y_DIR true
+#define INVERT_Z_DIR true
 // #define INVERT_I_DIR false
 // #define INVERT_J_DIR false
 // #define INVERT_K_DIR false
@@ -1408,7 +1407,7 @@
 // Direction of endstops when homing; 1=MAX, -1=MIN
 // :[-1,1]
 #define X_HOME_DIR -1
-#define Y_HOME_DIR 1
+#define Y_HOME_DIR -1
 #define Z_HOME_DIR -1
 // #define I_HOME_DIR -1
 // #define J_HOME_DIR -1
@@ -1417,8 +1416,8 @@
 // @section machine
 
 // The size of the printable area
-#define X_BED_SIZE 240
-#define Y_BED_SIZE 230
+#define X_BED_SIZE 225
+#define Y_BED_SIZE 180
 
 // Travel limits (mm) after homing, corresponding to endstop positions.
 #define X_MIN_POS 0
@@ -1426,7 +1425,7 @@
 #define Z_MIN_POS 0
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
-#define Z_MAX_POS 180
+#define Z_MAX_POS 130
 // #define I_MIN_POS 0
 // #define I_MAX_POS 50
 // #define J_MIN_POS 0
@@ -1584,7 +1583,7 @@
  */
 // #define AUTO_BED_LEVELING_3POINT
 // #define AUTO_BED_LEVELING_LINEAR
-#define AUTO_BED_LEVELING_BILINEAR
+// #define AUTO_BED_LEVELING_BILINEAR
 // #define AUTO_BED_LEVELING_UBL
 // #define MESH_BED_LEVELING
 
@@ -1794,8 +1793,8 @@
 #define Z_SAFE_HOMING
 
 #if ENABLED(Z_SAFE_HOMING)
-#define Z_SAFE_HOMING_X_POINT X_CENTER // X point for Z homing
-#define Z_SAFE_HOMING_Y_POINT Y_CENTER // Y point for Z homing
+#define Z_SAFE_HOMING_X_POINT 0 // X point for Z homing
+#define Z_SAFE_HOMING_Y_POINT 0 // Y point for Z homing
 #endif
 
 // Homing speeds (mm/min)
@@ -2172,7 +2171,6 @@
  *
  * Use CRC checks and retries on the SD communication.
  */
-// #define SD_CHECK_AND_RETRY
 
 /**
  * LCD Menu Items
@@ -2235,8 +2233,8 @@
 //
 // Add individual axis homing items (Home X, Home Y, and Home Z) to the LCD menu.
 //
-// #define INDIVIDUAL_AXIS_HOMING_MENU
-// #define INDIVIDUAL_AXIS_HOMING_SUBMENU
+#define INDIVIDUAL_AXIS_HOMING_MENU
+#define INDIVIDUAL_AXIS_HOMING_SUBMENU
 
 //
 // SPEAKER/BUZZER
@@ -2253,8 +2251,8 @@
 // Note: Test audio output with the G-Code:
 //  M300 S<frequency Hz> P<duration ms>
 //
-// #define LCD_FEEDBACK_FREQUENCY_DURATION_MS 2
-// #define LCD_FEEDBACK_FREQUENCY_HZ 5000
+#define LCD_FEEDBACK_FREQUENCY_DURATION_MS 10
+#define LCD_FEEDBACK_FREQUENCY_HZ 1500
 
 //=============================================================================
 //======================== LCD / Controller Selection =========================
@@ -2425,7 +2423,7 @@
 // RepRapDiscount FULL GRAPHIC Smart Controller
 // https://reprap.org/wiki/RepRapDiscount_Full_Graphic_Smart_Controller
 //
-#define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
+// #define REPRAP_DISCOUNT_FULL_GRAPHIC_SMART_CONTROLLER
 
 //
 // K.3D Full Graphic Smart Controller
@@ -2710,7 +2708,7 @@
 // 480x320, 3.5", SPI Display From MKS
 // Normally used in MKS Robin Nano V2
 //
-// #define MKS_TS35_V2_0
+#define MKS_TS35_V2_0
 
 //
 // 320x240, 2.4", FSMC Display From MKS
@@ -2808,7 +2806,7 @@
  */
 // #define TFT_CLASSIC_UI
 // #define TFT_COLOR_UI
-// #define TFT_LVGL_UI
+#define TFT_LVGL_UI
 
 #if ENABLED(TFT_LVGL_UI)
 #define MKS_WIFI_MODULE // MKS WiFi module
@@ -2852,7 +2850,7 @@
 //
 // Touch Screen Settings
 //
-// #define TOUCH_SCREEN
+#define TOUCH_SCREEN
 #if ENABLED(TOUCH_SCREEN)
 #define BUTTON_DELAY_EDIT 50  // (ms) Button repeat delay for edit screens
 #define BUTTON_DELAY_MENU 250 // (ms) Button repeat delay for menus
